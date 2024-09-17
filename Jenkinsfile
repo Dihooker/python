@@ -3,22 +3,19 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-                // Clona tu repositorio desde GitHub
-                git 'https://github.com/Dihooker/python.git'
+                // Clona tu repositorio desde GitHub y especifica la rama
+                git branch: 'main', url: 'https://github.com/Dihooker/python.git'
             }
         }
         stage('Verificar Python') {
             steps {
-                // Verifica que Python esté instalado
                 sh 'python3 --version'
             }
         }
         stage('Ejecutar prueba.py') {
             steps {
-                // Ejecuta tu script prueba.py
                 sh 'python3 prueba.py'
             }
         }
     }
 }
-
