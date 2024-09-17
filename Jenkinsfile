@@ -1,10 +1,19 @@
 pipeline {
-    agent any 
+    agent any
     stages {
-        stage('Build') { 
+        stage('Clonar Repositorio') {
             steps {
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
-                stash(name: 'compiled-results', includes: 'sources/*.py*') 
+                git 'https://github.com/Dihooker/python.git'
+            }
+        }
+        stage('Instalar Dependencias') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
+        stage('Ejecutar Script Python') {
+            steps {
+                sh 'python3 prueba.py'
             }
         }
     }
