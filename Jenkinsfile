@@ -8,30 +8,28 @@ pipeline {
     stages {
         stage('Preparar Entorno') {
             steps {
-                script {
-                    // Instalar dependencias si usas un archivo requirements.txt
-                   
-                }
+                // Instalar dependencias si usas un archivo requirements.txt
+                
             }
         }
 
         stage('Ejecutar Pruebas') {
             steps {
-                // Asegúrate de tener un archivo de pruebas, por ejemplo, test_calculadora.py
+                // Ejecutar pruebas con pytest o cualquier otro framework que uses
                 sh "python${PYTHON_VERSION} -m pytest test_calculadora.py"
             }
         }
 
         stage('Construir Artefacto') {
             steps {
-                // Si tu calculadora genera algún artefacto, puedes construirlo aquí
+                // Construir tu artefacto si es necesario
                 echo 'Construyendo el artefacto...'
             }
         }
 
         stage('Despliegue') {
             steps {
-                // Despliegue de tu aplicación, si aplica
+                // Despliegue de tu aplicación (esto puede variar según tu configuración)
                 echo 'Desplegando la aplicación...'
             }
         }
@@ -39,7 +37,6 @@ pipeline {
 
     post {
         always {
-            // Limpieza del entorno
             echo 'Limpieza del entorno...'
             cleanWs()
         }
@@ -51,3 +48,4 @@ pipeline {
         }
     }
 }
+
