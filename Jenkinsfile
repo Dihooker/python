@@ -6,13 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Preparar Entorno') {
-            steps {
-                // Instalar dependencias si usas un archivo requirements.txt
-                
-            }
-        }
-
         stage('Ejecutar Pruebas') {
             steps {
                 // Ejecutar pruebas con pytest o cualquier otro framework que uses
