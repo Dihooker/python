@@ -10,7 +10,6 @@ pipeline {
             steps {
                 script {
                     // Instalar dependencias si usas un archivo requirements.txt
-                    sh "python${PYTHON_VERSION} -m pip install --upgrade pip"
                     sh "python${PYTHON_VERSION} -m pip install -r requirements.txt"
                 }
             }
