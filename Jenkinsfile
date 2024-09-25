@@ -1,21 +1,54 @@
 pipeline {
     agent any
+
+    environment {
+        PYTHON_VERSION = '3.8'
+    }
+
     stages {
-        stage('Clonar Repositorio') {
+        stage('Preparar Entorno') {
             steps {
-                // Clona tu repositorio desde GitHub y especifica la rama
-                git branch: 'main', url: 'https://github.com/Dihooker/python.git'
+                script {
+                    // Instalar dependencias si usas un archivo requirements.txt
+                    sh "python${PYTHON_VERSION} -m pip install --upgrade pip"
+                    sh "python${PYTHON_VERSION} -m pip install -r requirements.txt"
+                }
             }
         }
-        stage('Verificar Python') {
+
+        stage('Ejecutar Pruebas') {
             steps {
-                sh 'python3 --version'
+                // Asegúrate de tener un archivo de pruebas, por ejemplo, test_calculadora.py
+                sh "python${PYTHON_VERSION} -m pytest test_calculadora.py"
             }
         }
-        stage('Ejecutar prueba.py') {
+
+        stage('Construir Artefacto') {
             steps {
-                sh 'python3 prueba.py'
+                // Si tu calculadora genera algún artefacto, puedes construirlo aquí
+                echo 'Construyendo el artefacto...'
             }
+        }
+
+        stage('Despliegue') {
+            steps {
+                // Despliegue de tu aplicación, si aplica
+                echo 'Desplegando la aplicación...'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Limpieza del entorno
+            echo 'Limpieza del entorno...'
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline completado con éxito.'
+        }
+        failure {
+            echo 'Pipeline fallido. Revisa los logs para más detalles.'
         }
     }
 }
