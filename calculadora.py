@@ -30,7 +30,7 @@ if __name__ == "__main__":
         try:
             entrada = input(" (+, -, *, /, **, salir): ").strip()
             if entrada.lower() == "salir":
-                break
+                bre
 
             Fnumber = int(input("Ingrese el primer numero: "))
             Snumber = int(input("Ingrese el segundo numero: "))
